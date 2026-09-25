@@ -1,0 +1,30 @@
+import {describe,it,expect} from 'vitest';
+import {reservationErrors,visibleActions,countActive,filterEquipment,localInput} from '../src/rules.js';
+const now=Date.UTC(2026,8,25,12),data={equipment_id:'eq-1',start:new Date(now+3600000).toISOString(),end:new Date(now+7200000).toISOString(),purpose:'Práctica de laboratorio'};
+const student={id:'s',role:'STUDENT'},admin={id:'a',role:'ADMIN'},r={user_id:'s',start:now+3600000,end:now+7200000,status:'REQUESTED'};
+describe('Validación visual',()=>{
+ it('formulario válido no presenta errores',()=>expect(reservationErrors(data,now)).toEqual({}));
+ it('equipo obligatorio',()=>expect(reservationErrors({...data,equipment_id:''},now)).toHaveProperty('equipment_id'));
+ it('fecha inválida',()=>expect(reservationErrors({...data,start:''},now)).toHaveProperty('start'));
+ it('fecha pasada',()=>expect(reservationErrors({...data,start:new Date(now).toISOString()},now)).toHaveProperty('start'));
+ it('más de 30 días',()=>expect(reservationErrors({...data,start:new Date(now+31*86400000).toISOString()},now)).toHaveProperty('start'));
+ it('fin inválido',()=>expect(reservationErrors({...data,end:''},now)).toHaveProperty('end'));
+ it('duración demasiado larga',()=>expect(reservationErrors({...data,end:new Date(now+10*3600000).toISOString()},now)).toHaveProperty('end'));
+ it('propósito demasiado corto',()=>expect(reservationErrors({...data,purpose:'corto'},now)).toHaveProperty('purpose'));
+ it('propósito demasiado largo',()=>expect(reservationErrors({...data,purpose:'x'.repeat(301)},now)).toHaveProperty('purpose'));
+});
+describe('Acciones por rol y estado',()=>{
+ it('estudiante ve cancelar su solicitud',()=>expect(visibleActions(r,student,now)).toEqual(['cancel']));
+ it('otro estudiante no ve acciones',()=>expect(visibleActions(r,{id:'other',role:'STUDENT'},now)).toEqual([]));
+ it('administrador ve aprobar rechazar cancelar',()=>expect(visibleActions(r,admin,now)).toEqual(['approve','reject','cancel']));
+ it('solicitud vencida solo rechazar',()=>expect(visibleActions({...r,start:now},admin,now)).toEqual(['reject']));
+ it('entrega disponible en ventana',()=>expect(visibleActions({...r,status:'APPROVED'},admin,r.start)).toEqual(['checkout']));
+ it('no entrega demasiado pronto',()=>expect(visibleActions({...r,status:'APPROVED'},admin,now)).not.toContain('checkout'));
+ it('préstamo puede devolverse',()=>expect(visibleActions({...r,status:'CHECKED_OUT'},admin,now)).toEqual(['return']));
+ it('devuelto sin acciones',()=>expect(visibleActions({...r,status:'RETURNED'},admin,now)).toEqual([]));
+});
+it('cuenta únicamente los tres estados activos',()=>expect(countActive(['REQUESTED','APPROVED','CHECKED_OUT','RETURNED','CANCELLED','REJECTED'].map(status=>({status})))).toBe(3));
+it('filtro ignora mayúsculas y espacios externos',()=>expect(filterEquipment([{name:'Osciloscopio',code:'LAB-1',category:'Electrónica',status:'AVAILABLE'}],'  OSCILO ')).toHaveLength(1));
+it('filtro por estado excluye mantenimiento',()=>expect(filterEquipment([{name:'Multímetro',code:'LAB-2',category:'Medición',status:'MAINTENANCE'}],'','AVAILABLE')).toEqual([]));
+it('filtro por código',()=>expect(filterEquipment([{name:'Equipo',code:'LAB-9',category:'Medición',status:'AVAILABLE'}],'lab-9')).toHaveLength(1));
+it('fecha local conserva el instante hasta minutos',()=>expect(new Date(localInput(now)).getTime()).toBe(now));

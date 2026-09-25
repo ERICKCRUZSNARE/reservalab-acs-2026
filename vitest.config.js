@@ -1,0 +1,2 @@
+import {defineConfig} from 'vitest/config';
+export default defineConfig({test:{include:['backend/test/**/*.test.js','frontend/test/**/*.test.{js,jsx}'],reporters:['default','json','junit'],outputFile:{json:'qa/evidencias/unitarias.json',junit:'qa/evidencias/unitarias.xml'},coverage:{provider:'v8',include:['backend/src/domain.js','backend/src/security.js','frontend/src/rules.js','frontend/src/api.js'],reporter:['text','json-summary','lcov','html'],reportsDirectory:'coverage',thresholds:{lines:80,branches:75,functions:80,statements:80}}}});
