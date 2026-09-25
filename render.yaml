@@ -1,0 +1,41 @@
+# Plantilla para un ambiente QA. Repetir con nombres, rama y base independientes en DEV/PROD.
+# No se ha creado ningún recurso ni ejecutado despliegue desde este paquete.
+services:
+  - type: web
+    name: reservalab-api-qa
+    runtime: node
+    branch: QA
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start -w backend
+    healthCheckPath: /api/health
+    autoDeployTrigger: off
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATABASE_URL
+        sync: false
+      - key: APP_ORIGIN
+        sync: false
+      - key: SEED_DEMO
+        value: 'true'
+      - key: ADMIN_EMAIL
+        value: admin@reservalab.test
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: STUDENT_PASSWORD
+        sync: false
+  - type: web
+    name: reservalab-web-qa
+    runtime: static
+    branch: QA
+    buildCommand: npm ci && npm run build -w frontend
+    staticPublishPath: frontend/dist
+    autoDeployTrigger: off
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: VITE_API_URL
+        sync: false

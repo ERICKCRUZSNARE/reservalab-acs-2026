@@ -1,0 +1,562 @@
+{
+  "executedAt": "2026-09-25T01:24:45.989Z",
+  "environment": "LOCAL aislado; HTTP real con PGlite",
+  "stats": {
+    "iterations": {
+      "total": 1,
+      "pending": 0,
+      "failed": 0
+    },
+    "items": {
+      "total": 24,
+      "pending": 0,
+      "failed": 0
+    },
+    "scripts": {
+      "total": 48,
+      "pending": 0,
+      "failed": 0
+    },
+    "prerequests": {
+      "total": 24,
+      "pending": 0,
+      "failed": 0
+    },
+    "requests": {
+      "total": 24,
+      "pending": 0,
+      "failed": 0
+    },
+    "tests": {
+      "total": 24,
+      "pending": 0,
+      "failed": 0
+    },
+    "assertions": {
+      "total": 85,
+      "pending": 0,
+      "failed": 0
+    },
+    "testScripts": {
+      "total": 24,
+      "pending": 0,
+      "failed": 0
+    },
+    "prerequestScripts": {
+      "total": 24,
+      "pending": 0,
+      "failed": 0
+    }
+  },
+  "failures": [],
+  "executions": [
+    {
+      "request": "API-01 Salud",
+      "status": 200,
+      "responseTime": 25,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Servicio disponible",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-02 Sin sesión",
+      "status": 401,
+      "responseTime": 4,
+      "assertions": [
+        {
+          "assertion": "HTTP 401",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido de error",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-03 Registrar usuario",
+      "status": 201,
+      "responseTime": 43,
+      "assertions": [
+        {
+          "assertion": "HTTP 201",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Rol estudiante",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-04 Login estudiante",
+      "status": 200,
+      "responseTime": 46,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-05 Identidad",
+      "status": 200,
+      "responseTime": 4,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Rol correcto",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-06 Catálogo",
+      "status": 200,
+      "responseTime": 5,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Catálogo sembrado",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-07 Crear equipo prohibido",
+      "status": 403,
+      "responseTime": 4,
+      "assertions": [
+        {
+          "assertion": "HTTP 403",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido de error",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-08 Duración inválida",
+      "status": 422,
+      "responseTime": 4,
+      "assertions": [
+        {
+          "assertion": "HTTP 422",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido de error",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-09 Crear reserva",
+      "status": 201,
+      "responseTime": 12,
+      "assertions": [
+        {
+          "assertion": "HTTP 201",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Estado solicitado",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-10 Listar reservas propias",
+      "status": 200,
+      "responseTime": 4,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contiene reserva",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-11 Login administrador",
+      "status": 200,
+      "responseTime": 37,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-12 approve",
+      "status": 200,
+      "responseTime": 9,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Estado APPROVED",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-13 checkout",
+      "status": 200,
+      "responseTime": 5,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Estado CHECKED_OUT",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-14 return",
+      "status": 200,
+      "responseTime": 5,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Estado RETURNED",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-15 Devolver dos veces",
+      "status": 409,
+      "responseTime": 5,
+      "assertions": [
+        {
+          "assertion": "HTTP 409",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido de error",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-16 Auditoría",
+      "status": 200,
+      "responseTime": 4,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Eventos registrados",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-17 Resumen",
+      "status": 200,
+      "responseTime": 4,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Devolución contada",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-18 Activar mantenimiento",
+      "status": 200,
+      "responseTime": 13,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Mantenimiento activo",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-19 Reserva bloqueada por mantenimiento",
+      "status": 409,
+      "responseTime": 5,
+      "assertions": [
+        {
+          "assertion": "HTTP 409",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido de error",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-20 Finalizar mantenimiento",
+      "status": 200,
+      "responseTime": 6,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Disponible",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-21 Crear equipo",
+      "status": 201,
+      "responseTime": 5,
+      "assertions": [
+        {
+          "assertion": "HTTP 201",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-22 Código duplicado",
+      "status": 409,
+      "responseTime": 7,
+      "assertions": [
+        {
+          "assertion": "HTTP 409",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido de error",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-23 Cerrar sesión",
+      "status": 200,
+      "responseTime": 11,
+      "assertions": [
+        {
+          "assertion": "HTTP 200",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido no vacío",
+          "error": null
+        }
+      ]
+    },
+    {
+      "request": "API-24 Sesión revocada",
+      "status": 401,
+      "responseTime": 3,
+      "assertions": [
+        {
+          "assertion": "HTTP 401",
+          "error": null
+        },
+        {
+          "assertion": "Esquema JSON",
+          "error": null
+        },
+        {
+          "assertion": "Contenido de error",
+          "error": null
+        }
+      ]
+    }
+  ]
+}

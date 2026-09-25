@@ -1,0 +1,67 @@
+name: ReservaLab Quality
+on:
+  push:
+    branches: [DEV, QA, main]
+  pull_request:
+    branches: [DEV, QA, main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: quality-${{ github.base_ref || github.ref_name }}
+  cancel-in-progress: false
+jobs:
+  quality:
+    name: quality
+    runs-on: [self-hosted, Windows, X64]
+    environment: ${{ (github.base_ref || github.ref_name) == 'main' && 'PROD' || ((github.base_ref || github.ref_name) == 'QA' && 'QA' || 'DEV') }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: 1 - Compilar backend y frontend
+        run: npm run build
+      - name: 2 - Pruebas unitarias y cobertura
+        run: npm run test:coverage
+      - name: Verificar incremento sobre línea base
+        run: node scripts/check-coverage.mjs
+      - name: 3 - SonarQube y Quality Gate
+        shell: powershell
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+        run: |
+          if (-not $env:SONAR_PROJECT_KEY) { throw "Configura SONAR_PROJECT_KEY en el ambiente" }
+          ./scripts/sonar.ps1 -ProjectKey $env:SONAR_PROJECT_KEY
+      - name: Exportar resultados Sonar
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: http://localhost:9000
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+        run: node scripts/sonar-evidence.mjs actual
+      - name: 4 - Pruebas API con Newman
+        run: npm run test:api
+      - name: Regresión funcional
+        run: npm run test:functional
+      - name: 5 - Desplegar el commit verificado
+        if: github.event_name != 'pull_request'
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_BACKEND_ID: ${{ vars.RENDER_BACKEND_ID }}
+          RENDER_FRONTEND_ID: ${{ vars.RENDER_FRONTEND_ID }}
+          DEPLOY_COMMIT: ${{ github.sha }}
+        run: node scripts/deploy-render.mjs
+      - name: Guardar evidencias
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-${{ github.run_id }}
+          path: |
+            qa/evidencias
+            coverage

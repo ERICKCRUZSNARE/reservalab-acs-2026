@@ -1,0 +1,884 @@
+{
+  "info": {
+    "name": "ReservaLab - API y flujo completo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "24 solicitudes. Ejecutar en una base QA aislada con datos demo. No ejecutar en PROD."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:3001"
+    },
+    {
+      "key": "adminEmail",
+      "value": "admin@reservalab.test"
+    },
+    {
+      "key": "adminPassword",
+      "value": "AdminDemo2026!"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if(!pm.collectionVariables.get(\"runId\")){ const start=Math.ceil(Date.now()/60000)*60000+5*60000;pm.collectionVariables.set(\"runId\",String(Date.now()));pm.collectionVariables.set(\"start\",start);pm.collectionVariables.set(\"end\",start+3600000);pm.collectionVariables.set(\"invalidEnd\",start+59*60000); }"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "API-01 Salud",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/health"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"status\"]}));",
+              "pm.test(\"Servicio disponible\",()=>pm.expect(body.status).to.equal(\"ok\"));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-02 Sin sesión",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/equipment"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\",()=>pm.response.to.have.status(401));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"code\", \"message\"]}));",
+              "pm.test(\"Contenido de error\",()=>pm.expect(body.message).to.be.a(\"string\").and.not.empty);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-03 Registrar usuario",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Usuario API\", \"email\": \"api-{{runId}}@example.test\", \"password\": \"PruebaApi2026!\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"id\", \"role\"]}));",
+              "pm.test(\"Rol estudiante\",()=>pm.expect(body.role).to.equal(\"STUDENT\"));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-04 Login estudiante",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"api-{{runId}}@example.test\", \"password\": \"PruebaApi2026!\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"token\", \"user\"]}));",
+              "pm.collectionVariables.set(\"studentToken\",body.token);",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-05 Identidad",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/me"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"id\", \"name\", \"role\"]}));",
+              "pm.test(\"Rol correcto\",()=>pm.expect(body.role).to.equal(\"STUDENT\"));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-06 Catálogo",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/equipment"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"array\", \"items\": {\"type\": \"object\", \"required\": [\"id\", \"name\", \"status\"]}}));",
+              "pm.test(\"Catálogo sembrado\",()=>pm.expect(body.length).to.be.at.least(4));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-07 Crear equipo prohibido",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/equipment",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"code\": \"NO-001\", \"name\": \"No permitido\", \"category\": \"Prueba\", \"description\": \"Prueba de permisos\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 403\",()=>pm.response.to.have.status(403));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"code\", \"message\"]}));",
+              "pm.test(\"Contenido de error\",()=>pm.expect(body.message).to.be.a(\"string\").and.not.empty);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-08 Duración inválida",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/reservations",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"equipment_id\": \"eq-1\", \"start\": {{start}}, \"end\": {{invalidEnd}}, \"purpose\": \"Práctica automatizada de laboratorio\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 422\",()=>pm.response.to.have.status(422));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"code\", \"message\"]}));",
+              "pm.test(\"Contenido de error\",()=>pm.expect(body.message).to.be.a(\"string\").and.not.empty);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-09 Crear reserva",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/reservations",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"equipment_id\": \"eq-1\", \"start\": {{start}}, \"end\": {{end}}, \"purpose\": \"Práctica automatizada de laboratorio\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"id\", \"status\"]}));",
+              "pm.collectionVariables.set(\"reservationId\",body.id);",
+              "pm.test(\"Estado solicitado\",()=>pm.expect(body.status).to.equal(\"REQUESTED\"));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-10 Listar reservas propias",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/reservations"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"array\", \"items\": {\"type\": \"object\", \"required\": [\"id\", \"status\"]}}));",
+              "pm.test(\"Contiene reserva\",()=>pm.expect(body.some(x=>x.id===pm.collectionVariables.get(\"reservationId\"))).to.equal(true));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-11 Login administrador",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"{{adminEmail}}\", \"password\": \"{{adminPassword}}\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"token\", \"user\"]}));",
+              "pm.collectionVariables.set(\"adminToken\",body.token);",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-12 approve",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/reservations/{{reservationId}}/approve",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"id\", \"status\"]}));",
+              "pm.test(\"Estado APPROVED\",()=>pm.expect(body.status).to.equal(\"APPROVED\"));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-13 checkout",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/reservations/{{reservationId}}/checkout",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"id\", \"status\"]}));",
+              "pm.test(\"Estado CHECKED_OUT\",()=>pm.expect(body.status).to.equal(\"CHECKED_OUT\"));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-14 return",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/reservations/{{reservationId}}/return",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"id\", \"status\"]}));",
+              "pm.test(\"Estado RETURNED\",()=>pm.expect(body.status).to.equal(\"RETURNED\"));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-15 Devolver dos veces",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/reservations/{{reservationId}}/return",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"code\", \"message\"]}));",
+              "pm.test(\"Contenido de error\",()=>pm.expect(body.message).to.be.a(\"string\").and.not.empty);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-16 Auditoría",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/audit"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"array\", \"items\": {\"type\": \"object\", \"required\": [\"action\", \"user_id\", \"created_at\"]}}));",
+              "pm.test(\"Eventos registrados\",()=>pm.expect(body.length).to.be.at.least(4));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-17 Resumen",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/dashboard"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"counts\", \"equipment\"]}));",
+              "pm.test(\"Devolución contada\",()=>pm.expect(body.counts.RETURNED).to.be.at.least(1));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-18 Activar mantenimiento",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/equipment/eq-1/status",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"status\": \"MAINTENANCE\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"id\", \"status\"]}));",
+              "pm.test(\"Mantenimiento activo\",()=>pm.expect(body.status).to.equal(\"MAINTENANCE\"));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-19 Reserva bloqueada por mantenimiento",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/reservations",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"equipment_id\": \"eq-1\", \"start\": {{start}}, \"end\": {{end}}, \"purpose\": \"Práctica automatizada de laboratorio\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"code\", \"message\"]}));",
+              "pm.test(\"Contenido de error\",()=>pm.expect(body.message).to.be.a(\"string\").and.not.empty);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-20 Finalizar mantenimiento",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/equipment/eq-1/status",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"status\": \"AVAILABLE\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"id\", \"status\"]}));",
+              "pm.test(\"Disponible\",()=>pm.expect(body.status).to.equal(\"AVAILABLE\"));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-21 Crear equipo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/equipment",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"code\": \"API-{{runId}}\", \"name\": \"Equipo API\", \"category\": \"Pruebas\", \"description\": \"Equipo de prueba de integración\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"id\", \"code\"]}));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-22 Código duplicado",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/equipment",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"code\": \"API-{{runId}}\", \"name\": \"Equipo API\", \"category\": \"Pruebas\", \"description\": \"Equipo de prueba de integración\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"code\", \"message\"]}));",
+              "pm.test(\"Contenido de error\",()=>pm.expect(body.message).to.be.a(\"string\").and.not.empty);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-23 Cerrar sesión",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/logout",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"message\"]}));",
+              "pm.test(\"Contenido no vacío\",()=>pm.expect(body).to.not.equal(null));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API-24 Sesión revocada",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/me"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\",()=>pm.response.to.have.status(401));",
+              "const body=pm.response.json();",
+              "pm.test(\"Esquema JSON\",()=>pm.response.to.have.jsonSchema({\"type\": \"object\", \"required\": [\"code\", \"message\"]}));",
+              "pm.test(\"Contenido de error\",()=>pm.expect(body.message).to.be.a(\"string\").and.not.empty);"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

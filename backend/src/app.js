@@ -14,6 +14,11 @@ export function createApp(db,{clock=Date.now,origin=process.env.APP_ORIGIN || 'h
     next();
   });
   app.use(express.json({limit:'16kb'}));
+  app.use((req,res,next)=>{
+    const needsBody=(req.method==='POST'&&['/api/auth/login','/api/auth/register','/api/equipment','/api/reservations'].includes(req.path))||req.method==='PATCH';
+    if(needsBody) requireRule(req.body && typeof req.body==='object' && !Array.isArray(req.body),'BODY','Envía un objeto JSON con los datos de la operación.',400);
+    next();
+  });
   app.get('/api/health',async(req,res)=>{await db.query('SELECT 1');res.json({status:'ok',application:'ReservaLab'});});
   app.post('/api/auth/register',async(req,res)=>{
     const data=validateRegistration(req.body); const id=randomUUID();
@@ -51,7 +56,7 @@ export function createApp(db,{clock=Date.now,origin=process.env.APP_ORIGIN || 'h
     const id=randomUUID();
     try {await db.transaction(async tx=>{await tx.query('INSERT INTO equipment VALUES ($1,$2,$3,$4,$5,$6)',[id,code,name.trim(),category.trim(),description.trim(),'AVAILABLE']);await audit(tx,req.user,'EQUIPMENT_CREATED',id,clock());});}
     catch(e){if(e.code==='23505')throw new RuleError('DUPLICATE','Ese código ya existe.',409);throw e;}
-    res.status(201).json({id,code,name,category,description,status:'AVAILABLE'});
+    res.status(201).json({id,code,name:name.trim(),category:category.trim(),description:description.trim(),status:'AVAILABLE'});
   });
   app.patch('/api/equipment/:id/status',admin,async(req,res)=>{
     const status=req.body.status;requireRule(['AVAILABLE','MAINTENANCE','RETIRED'].includes(status),'STATUS','Estado de equipo inválido.');
@@ -80,6 +85,11 @@ export function createApp(db,{clock=Date.now,origin=process.env.APP_ORIGIN || 'h
     const row=await db.transaction(async tx=>{
       const r=(await tx.query('SELECT * FROM reservations WHERE id=$1 FOR UPDATE',[req.params.id])).rows[0];requireRule(r,'NOT_FOUND','Reserva no encontrada.',404);
       const now=clock(),action=req.params.action;const to=canTransition(r,action,req.user,now);
+      if(action==='checkout'){
+        await tx.query('SELECT id FROM equipment WHERE id=$1 FOR UPDATE',[r.equipment_id]);
+        const outstanding=await tx.query("SELECT id FROM reservations WHERE equipment_id=$1 AND id<>$2 AND status='CHECKED_OUT'",[r.equipment_id,r.id]);
+        requireRule(outstanding.rows.length===0,'OUTSTANDING_LOAN','El equipo todavía no ha sido devuelto por el préstamo anterior.',409);
+      }
       if(action==='approve') await authorizeApproval({equipment:async id=>(await tx.query('SELECT * FROM equipment WHERE id=$1 FOR UPDATE',[id])).rows[0],conflicts:async r=>(await tx.query(`SELECT id FROM reservations WHERE id<>$1 AND equipment_id=$2 AND status IN ('APPROVED','CHECKED_OUT') AND start<$4 AND "end">$3`,[r.id,r.equipment_id,r.start,r.end])).rows},r,now);
       const result=await tx.query('UPDATE reservations SET status=$1,returned_at=$2,late_minutes=$3 WHERE id=$4 RETURNING *',[to,action==='return'?now:null,action==='return'?lateMinutes(Number(r.end),now):0,r.id]);
       await audit(tx,req.user,'RESERVATION_'+to,r.id,now);return result.rows[0];

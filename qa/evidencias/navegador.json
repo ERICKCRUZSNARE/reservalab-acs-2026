@@ -1,0 +1,17 @@
+{
+  "executedAt": "2026-09-25T01:19:43.714Z",
+  "browser": "Chromium headless",
+  "desktop": "1440x1000",
+  "mobile": "390x844",
+  "actions": [
+    "login",
+    "catálogo",
+    "crear reserva",
+    "aprobar reserva",
+    "auditoría",
+    "vista móvil"
+  ],
+  "pageErrors": [],
+  "mobileOverflow": false,
+  "result": "Aprobado"
+}
