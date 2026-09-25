@@ -13,6 +13,8 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 24.19.0
+      - key: NODE_ENV
+        value: production
       - key: HOST
         value: 0.0.0.0
       - key: DATABASE_URL
@@ -20,7 +22,7 @@ services:
       - key: APP_ORIGIN
         sync: false
       - key: SEED_DEMO
-        value: 'true'
+        value: "true"
       - key: ADMIN_EMAIL
         value: admin@reservalab.test
       - key: ADMIN_PASSWORD
@@ -31,7 +33,7 @@ services:
     name: reservalab-web-qa
     runtime: static
     branch: QA
-    buildCommand: npm ci && npm run build -w frontend
+    buildCommand: npm ci --include=dev && npm run build -w frontend
     staticPublishPath: frontend/dist
     autoDeployTrigger: off
     envVars:

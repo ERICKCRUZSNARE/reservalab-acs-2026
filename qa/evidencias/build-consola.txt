@@ -1,0 +1,22 @@
+
+> reservalab-acs-2026@1.0.0 build
+> npm run build -w backend && npm run build -w frontend
+
+
+> @reservalab/backend@1.0.0 build
+> node --check src/server.js && node --check src/app.js && node --check src/domain.js
+
+
+> @reservalab/frontend@1.0.0 build
+> vite build
+
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 17 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.52 kB │ gzip:  0.34 kB
+dist/assets/index-BKLH-T36.css    8.14 kB │ gzip:  2.52 kB
+dist/assets/index-DgK46eod.js   234.27 kB │ gzip: 73.30 kB
+
+✓ built in 290ms

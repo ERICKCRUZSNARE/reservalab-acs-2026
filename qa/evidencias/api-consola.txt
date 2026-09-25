@@ -1,0 +1,184 @@
+
+> reservalab-acs-2026@1.0.0 test:api
+> node scripts/run-api.mjs
+
+newman
+
+ReservaLab - API y flujo completo
+
+→ API-01 Salud
+  GET http://127.0.0.1:40249/api/health [200 OK, 342B, 25ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Servicio disponible
+  ✓  Contenido no vacío
+
+→ API-02 Sin sesión
+  GET http://127.0.0.1:40249/api/equipment [401 Unauthorized, 368B, 4ms]
+  ✓  HTTP 401
+  ✓  Esquema JSON
+  ✓  Contenido de error
+
+→ API-03 Registrar usuario
+  POST http://127.0.0.1:40249/api/auth/register [201 Created, 430B, 43ms]
+  ✓  HTTP 201
+  ✓  Esquema JSON
+  ✓  Rol estudiante
+  ✓  Contenido no vacío
+
+→ API-04 Login estudiante
+  POST http://127.0.0.1:40249/api/auth/login [200 OK, 509B, 46ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Contenido no vacío
+
+→ API-05 Identidad
+  GET http://127.0.0.1:40249/api/auth/me [200 OK, 425B, 4ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Rol correcto
+  ✓  Contenido no vacío
+
+→ API-06 Catálogo
+  GET http://127.0.0.1:40249/api/equipment [200 OK, 1.02kB, 5ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Catálogo sembrado
+  ✓  Contenido no vacío
+
+→ API-07 Crear equipo prohibido
+  POST http://127.0.0.1:40249/api/equipment [403 Forbidden, 386B, 4ms]
+  ✓  HTTP 403
+  ✓  Esquema JSON
+  ✓  Contenido de error
+
+→ API-08 Duración inválida
+  POST http://127.0.0.1:40249/api/reservations [422 Unprocessable Entity, 392B, 4ms]
+  ✓  HTTP 422
+  ✓  Esquema JSON
+  ✓  Contenido de error
+
+→ API-09 Crear reserva
+  POST http://127.0.0.1:40249/api/reservations [201 Created, 599B, 12ms]
+  ✓  HTTP 201
+  ✓  Esquema JSON
+  ✓  Estado solicitado
+  ✓  Contenido no vacío
+
+→ API-10 Listar reservas propias
+  GET http://127.0.0.1:40249/api/reservations [200 OK, 679B, 4ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Contiene reserva
+  ✓  Contenido no vacío
+
+→ API-11 Login administrador
+  POST http://127.0.0.1:40249/api/auth/login [200 OK, 469B, 37ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Contenido no vacío
+
+→ API-12 approve
+  POST http://127.0.0.1:40249/api/reservations/d661dbcc-59df-490b-9f68-1320359403b7/approve [200 OK, 593B, 9ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Estado APPROVED
+  ✓  Contenido no vacío
+
+→ API-13 checkout
+  POST http://127.0.0.1:40249/api/reservations/d661dbcc-59df-490b-9f68-1320359403b7/checkout [200 OK, 596B, 5ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Estado CHECKED_OUT
+  ✓  Contenido no vacío
+
+→ API-14 return
+  POST http://127.0.0.1:40249/api/reservations/d661dbcc-59df-490b-9f68-1320359403b7/return [200 OK, 602B, 5ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Estado RETURNED
+  ✓  Contenido no vacío
+
+→ API-15 Devolver dos veces
+  POST http://127.0.0.1:40249/api/reservations/d661dbcc-59df-490b-9f68-1320359403b7/return [409 Conflict, 392B, 5ms]
+  ✓  HTTP 409
+  ✓  Esquema JSON
+  ✓  Contenido de error
+
+→ API-16 Auditoría
+  GET http://127.0.0.1:40249/api/audit [200 OK, 1.14kB, 4ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Eventos registrados
+  ✓  Contenido no vacío
+
+→ API-17 Resumen
+  GET http://127.0.0.1:40249/api/dashboard [200 OK, 339B, 4ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Devolución contada
+  ✓  Contenido no vacío
+
+→ API-18 Activar mantenimiento
+  PATCH http://127.0.0.1:40249/api/equipment/eq-1/status [200 OK, 489B, 13ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Mantenimiento activo
+  ✓  Contenido no vacío
+
+→ API-19 Reserva bloqueada por mantenimiento
+  POST http://127.0.0.1:40249/api/reservations [409 Conflict, 369B, 5ms]
+  ✓  HTTP 409
+  ✓  Esquema JSON
+  ✓  Contenido de error
+
+→ API-20 Finalizar mantenimiento
+  PATCH http://127.0.0.1:40249/api/equipment/eq-1/status [200 OK, 487B, 6ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Disponible
+  ✓  Contenido no vacío
+
+→ API-21 Crear equipo
+  POST http://127.0.0.1:40249/api/equipment [201 Created, 489B, 5ms]
+  ✓  HTTP 201
+  ✓  Esquema JSON
+  ✓  Contenido no vacío
+
+→ API-22 Código duplicado
+  POST http://127.0.0.1:40249/api/equipment [409 Conflict, 361B, 7ms]
+  ✓  HTTP 409
+  ✓  Esquema JSON
+  ✓  Contenido de error
+
+→ API-23 Cerrar sesión
+  POST http://127.0.0.1:40249/api/auth/logout [200 OK, 330B, 11ms]
+  ✓  HTTP 200
+  ✓  Esquema JSON
+  ✓  Contenido no vacío
+
+→ API-24 Sesión revocada
+  GET http://127.0.0.1:40249/api/auth/me [401 Unauthorized, 384B, 3ms]
+  ✓  HTTP 401
+  ✓  Esquema JSON
+  ✓  Contenido de error
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │               24 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │               24 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │               24 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │               85 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 756ms                                     │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 4.89kB (approx)                          │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 11ms [min: 3ms, max: 46ms, s.d.: 12ms] │
+└───────────────────────────────────────────────────────────────┘

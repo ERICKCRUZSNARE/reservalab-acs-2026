@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="90" failures="0" errors="0" time="0.259286525">
+    <testsuite name="backend/test/domain.test.js" timestamp="2026-09-25T01:41:56.186Z" hostname="8c9e6e2e18c0" tests="59" failures="0" errors="0" skipped="0" time="0.017335005">
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; normaliza correo y nombre" time="0.003031434">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza nombre " time="0.000933798">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza nombre E" time="0.000253975">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza nombre xxxxxxxxxx" time="0.000179365">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza nombre null" time="0.000134829">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza contraseña inválida corta1A" time="0.000249318">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza contraseña inválida sinmayus" time="0.000212223">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza contraseña inválida SINMINUS" time="0.000317428">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza contraseña inválida SinDigit" time="0.000285642">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza contraseña inválida A1aA1aA1" time="0.000117243">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Registro: particiones y límites &gt; rechaza correo mal formado" time="0.000166816">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; acepta duración 1h" time="0.000247726">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; acepta duración 8h" time="0.000063434">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza duración 59min" time="0.00023065">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza duración 481min" time="0.000110002">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza duración 0min" time="0.000080489">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza duración -60min" time="0.000071005">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza inicio igual a ahora" time="0.000190841">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza fecha inválida" time="0.000134699">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; acepta anticipación 30 días exactos" time="0.000118976">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza 30 días y un minuto" time="0.000138464">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza segundos no alineados" time="0.000125035">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; acepta propósito de 10" time="0.000644421">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; acepta propósito de 300" time="0.000159595">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza propósito de 9" time="0.000155149">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Reserva: fronteras temporales &gt; rechaza propósito de 301" time="0.00008845">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Solapamientos &gt; detecta superposición parcial" time="0.000114289">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Solapamientos &gt; detecta contención" time="0.000134278">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Solapamientos &gt; permite intervalos contiguos" time="0.000085967">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Solapamientos &gt; permite intervalos separados" time="0.000072347">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; REQUESTED → APPROVED" time="0.000185925">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; REQUESTED → REJECTED" time="0.000056794">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; APPROVED → CHECKED_OUT" time="0.000041772">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; CHECKED_OUT → RETURNED" time="0.000060749">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; REQUESTED → CANCELLED" time="0.000077905">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; APPROVED → CANCELLED" time="0.000067881">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; propietario puede cancelar" time="0.000075381">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; estudiante no puede approve" time="0.000239744">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; estudiante no puede reject" time="0.000100248">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; estudiante no puede checkout" time="0.000077054">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; estudiante no puede return" time="0.000069052">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; otro estudiante no puede cancelar" time="0.00013574">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; rechaza acción desconocida" time="0.000187767">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; rechaza salto a devolución" time="0.000173135">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; no aprueba reserva iniciada" time="0.000273333">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; no cancela reserva iniciada" time="0.000227756">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; entrega a -15 minutos" time="0.000092086">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; rechaza entrega a -16 minutos" time="0.000136732">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Transiciones y permisos &gt; rechaza entrega al final" time="0.00012875">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Dobles de prueba: aprobación sin base de datos &gt; MOCK-01 aprueba cuando equipo está disponible y sin conflictos" time="0.001827897">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Dobles de prueba: aprobación sin base de datos &gt; MOCK-02 bloquea mantenimiento sin consultar conflictos" time="0.000775084">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Dobles de prueba: aprobación sin base de datos &gt; MOCK-03 bloquea conflicto de agenda" time="0.000322556">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Dobles de prueba: aprobación sin base de datos &gt; MOCK-04 propaga error del repositorio" time="0.000358479">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Dobles de prueba: aprobación sin base de datos &gt; no aprueba una reserva pasada" time="0.000243289">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Retraso &gt; retraso de -60000ms = 0min" time="0.000126436">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Retraso &gt; retraso de 0ms = 0min" time="0.000053619">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Retraso &gt; retraso de 1ms = 1min" time="0.000042713">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Retraso &gt; retraso de 60000ms = 1min" time="0.000086457">
+        </testcase>
+        <testcase classname="backend/test/domain.test.js" name="Retraso &gt; retraso de 60001ms = 2min" time="0.000106518">
+        </testcase>
+    </testsuite>
+    <testsuite name="backend/test/security.test.js" timestamp="2026-09-25T01:41:56.197Z" hostname="8c9e6e2e18c0" tests="6" failures="0" errors="0" skipped="0" time="0.225265683">
+        <testcase classname="backend/test/security.test.js" name="hash scrypt verifica contraseña correcta" time="0.081732316">
+        </testcase>
+        <testcase classname="backend/test/security.test.js" name="contraseña errónea no autentica" time="0.071581214">
+        </testcase>
+        <testcase classname="backend/test/security.test.js" name="salt único aun con contraseña igual" time="0.068844836">
+        </testcase>
+        <testcase classname="backend/test/security.test.js" name="rechaza entrada no textual" time="0.000253254">
+        </testcase>
+        <testcase classname="backend/test/security.test.js" name="rechaza contraseña demasiado larga" time="0.000107128">
+        </testcase>
+        <testcase classname="backend/test/security.test.js" name="tokens aleatorios distintos de 256 bits" time="0.001267461">
+        </testcase>
+    </testsuite>
+    <testsuite name="frontend/test/api.test.js" timestamp="2026-09-25T01:41:56.199Z" hostname="8c9e6e2e18c0" tests="3" failures="0" errors="0" skipped="0" time="0.007111296">
+        <testcase classname="frontend/test/api.test.js" name="cliente envía token, cuerpo JSON y método" time="0.004175933">
+        </testcase>
+        <testcase classname="frontend/test/api.test.js" name="cliente conserva mensaje y status del API" time="0.000629629">
+        </testcase>
+        <testcase classname="frontend/test/api.test.js" name="cliente presenta error genérico si no viene mensaje" time="0.00092831">
+        </testcase>
+    </testsuite>
+    <testsuite name="frontend/test/rules.test.js" timestamp="2026-09-25T01:41:56.199Z" hostname="8c9e6e2e18c0" tests="22" failures="0" errors="0" skipped="0" time="0.009574541">
+        <testcase classname="frontend/test/rules.test.js" name="Validación visual &gt; formulario válido no presenta errores" time="0.002668308">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Validación visual &gt; equipo obligatorio" time="0.000316817">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Validación visual &gt; fecha inválida" time="0.000136351">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Validación visual &gt; fecha pasada" time="0.000186024">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Validación visual &gt; más de 30 días" time="0.00012826">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Validación visual &gt; fin inválido" time="0.000100849">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Validación visual &gt; duración demasiado larga" time="0.000093057">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Validación visual &gt; propósito demasiado corto" time="0.00031198">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Validación visual &gt; propósito demasiado largo" time="0.000151373">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Acciones por rol y estado &gt; estudiante ve cancelar su solicitud" time="0.000239934">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Acciones por rol y estado &gt; otro estudiante no ve acciones" time="0.00013535">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Acciones por rol y estado &gt; administrador ve aprobar rechazar cancelar" time="0.000207236">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Acciones por rol y estado &gt; solicitud vencida solo rechazar" time="0.000403045">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Acciones por rol y estado &gt; entrega disponible en ventana" time="0.000144753">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Acciones por rol y estado &gt; no entrega demasiado pronto" time="0.001224397">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Acciones por rol y estado &gt; préstamo puede devolverse" time="0.000113558">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="Acciones por rol y estado &gt; devuelto sin acciones" time="0.000086157">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="cuenta únicamente los tres estados activos" time="0.000310278">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="filtro ignora mayúsculas y espacios externos" time="0.000380051">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="filtro por estado excluye mantenimiento" time="0.00010148">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="filtro por código" time="0.000121419">
+        </testcase>
+        <testcase classname="frontend/test/rules.test.js" name="fecha local conserva el instante hasta minutos" time="0.00011563">
+        </testcase>
+    </testsuite>
+</testsuites>

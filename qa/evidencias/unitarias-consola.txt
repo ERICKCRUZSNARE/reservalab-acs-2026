@@ -1,0 +1,32 @@
+
+> reservalab-acs-2026@1.0.0 test:coverage
+> vitest run --coverage
+
+
+ RUN  v5.0.1 /workspace/scratch/c1b820b84d07/ReservaLab
+      Coverage enabled with v8
+
+ ✓ frontend/test/rules.test.js (22 tests) 10ms
+ ✓ frontend/test/api.test.js (3 tests) 7ms
+ ✓ backend/test/domain.test.js (59 tests) 17ms
+ ✓ backend/test/security.test.js (6 tests) 225ms
+
+ Test Files  4 passed (4)
+      Tests  90 passed (90)
+   Start at  18:41:55
+   Duration  474ms (tests 46%, transform 29%, worker 13%, import 11%)
+
+JSON report written to /workspace/scratch/c1b820b84d07/ReservaLab/qa/evidencias/unitarias.json
+JUNIT report written to /workspace/scratch/c1b820b84d07/ReservaLab/qa/evidencias/unitarias.xml
+ % Coverage report from v8
+--------------|---------|----------|---------|---------|-------------------
+File          | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+--------------|---------|----------|---------|---------|-------------------
+--------------|---------|----------|---------|---------|-------------------
+
+=============================== Coverage summary ===============================
+Statements   : 100% ( 98/98 )
+Branches     : 100% ( 107/107 )
+Functions    : 100% ( 20/20 )
+Lines        : 100% ( 92/92 )
+================================================================================

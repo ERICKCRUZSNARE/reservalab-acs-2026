@@ -1,0 +1,914 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="ReservaLab ACS 2026">
+  <details>65 casos. Los resultados locales se importan por separado; no equivalen a una ejecución ya registrada en TestLink.</details>
+  <testcase name="CP-01 - Registrar estudiante válido">
+    <summary>&lt;p&gt;RF-01 | Partición de equivalencia | Datos: Nombre Erick; correo erick@example.test; clave Segura2026!&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 201; rol STUDENT</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-02 - Rechazar correo duplicado">
+    <summary>&lt;p&gt;RF-01 | Partición de equivalencia | Datos: alumno@reservalab.test&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 DUPLICATE</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-03 - Rechazar correo sin arroba">
+    <summary>&lt;p&gt;RF-01 | Partición de equivalencia | Datos: correo=incorrecto&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 422 EMAIL</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-04 - Contraseña de 9 caracteres">
+    <summary>&lt;p&gt;RF-01 | Valores límite | Datos: Abcdefg12 (9 caracteres)&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 422 PASSWORD</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-05 - Contraseña de 10 caracteres">
+    <summary>&lt;p&gt;RF-01 | Valores límite | Datos: Abcdefgh12 (10 caracteres)&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 201</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-06 - Credenciales válidas">
+    <summary>&lt;p&gt;RF-02 | Tabla de decisión | Datos: Correo existente y clave correcta&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 200; token emitido</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-07 - Credenciales inválidas">
+    <summary>&lt;p&gt;RF-02 | Tabla de decisión | Datos: Correo existente y clave incorrecta&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 401 LOGIN</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-08 - Recurso protegido sin sesión">
+    <summary>&lt;p&gt;RF-03 | Tabla de decisión | Datos: Sin Authorization&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 401 AUTH</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-09 - Sesión vencida a las 8 horas">
+    <summary>&lt;p&gt;RF-02 | Valores límite | Datos: T=emisión+8 horas&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 401 AUTH</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-10 - Consultar catálogo">
+    <summary>&lt;p&gt;RF-04 | Partición de equivalencia | Datos: Usuario autenticado&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 200; cuatro equipos</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-11 - Estudiante no crea equipos">
+    <summary>&lt;p&gt;RF-03 | Tabla de decisión | Datos: Rol STUDENT; equipo válido&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 403 FORBIDDEN</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-12 - Administrador crea equipo">
+    <summary>&lt;p&gt;RF-05 | Tabla de decisión | Datos: Rol ADMIN; código libre&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 201; equipo disponible</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-13 - Código de equipo duplicado">
+    <summary>&lt;p&gt;RF-05 | Partición de equivalencia | Datos: Código LAB-001 existente&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 DUPLICATE</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-14 - Reserva de equipo en mantenimiento">
+    <summary>&lt;p&gt;RF-06 | Tabla de decisión | Datos: eq-4; horario válido&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 EQUIPMENT</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-15 - Propósito de 9 caracteres">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: Propósito='a' repetido 9 veces&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 422</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-16 - Propósito de 10 caracteres">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: Propósito='a' repetido 10 veces&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 201</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-17 - Propósito de 300 caracteres">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: Propósito='a' repetido 300 veces&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 201</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-18 - Propósito de 301 caracteres">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: Propósito='a' repetido 301 veces&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 422</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-19 - Duración de 59 minutos">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: Inicio=T+60 min; fin=inicio+59 min&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 422</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-20 - Duración de 60 minutos">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: Inicio=T+60 min; fin=inicio+60 min&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 201</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-21 - Duración de 480 minutos">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: Inicio=T+60 min; fin=inicio+480 min&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 201</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-22 - Duración de 481 minutos">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: Inicio=T+60 min; fin=inicio+481 min&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 422</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-23 - Inicio igual al instante actual">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: start=T&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 422 PAST</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-24 - Anticipación exacta de 30 días">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: start=T+30 días&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 201</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-25 - Anticipación superior a 30 días">
+    <summary>&lt;p&gt;RF-06 | Valores límite | Datos: start=T+30 días+1 min&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 422 ADVANCE</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-26 - Tres reservas activas permitidas">
+    <summary>&lt;p&gt;RF-07 | Valores límite | Datos: Tres solicitudes futuras de un estudiante&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Tres HTTP 201</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-27 - Cuarta reserva activa bloqueada">
+    <summary>&lt;p&gt;RF-07 | Valores límite | Datos: Usuario con tres solicitudes&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 LIMIT</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-28 - Aprobar solicitud">
+    <summary>&lt;p&gt;RF-08 | Transición de estados | Datos: REQUESTED; administrador; equipo libre&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 200; APPROVED</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-29 - Solapamiento con reserva aprobada">
+    <summary>&lt;p&gt;RF-09 | Tabla de decisión | Datos: A aprobada [T+1h,T+2h); B [T+90min,T+150min)&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 CONFLICT</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-30 - Horarios contiguos permitidos">
+    <summary>&lt;p&gt;RF-09 | Valores límite | Datos: A [T+1h,T+2h); B [T+2h,T+3h)&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 201</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-31 - Segunda aprobación sobre horario ocupado">
+    <summary>&lt;p&gt;RF-09 | Tabla de decisión | Datos: Dos pendientes mismo horario; aprobar A y luego B&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Primera 200; segunda 409 CONFLICT</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-32 - Cancelar solicitud propia">
+    <summary>&lt;p&gt;RF-10 | Transición de estados | Datos: REQUESTED; usuario propietario&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 200 CANCELLED</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-33 - Cancelar solicitud ajena prohibido">
+    <summary>&lt;p&gt;RF-03 | Tabla de decisión | Datos: REQUESTED; otro estudiante&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 403 FORBIDDEN</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-34 - Cancelar reserva aprobada">
+    <summary>&lt;p&gt;RF-10 | Transición de estados | Datos: APPROVED; antes del inicio&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 200 CANCELLED</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-35 - Cancelar al inicio prohibido">
+    <summary>&lt;p&gt;RF-10 | Valores límite | Datos: APPROVED; T=start&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 STARTED</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-36 - Entrega 15 minutos antes">
+    <summary>&lt;p&gt;RF-11 | Valores límite | Datos: APPROVED; T=start-15 min&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 200 CHECKED_OUT</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-37 - Entrega 16 minutos antes prohibida">
+    <summary>&lt;p&gt;RF-11 | Valores límite | Datos: APPROVED; T=start-16 min&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 CHECKOUT_TIME</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-38 - Devolución normal">
+    <summary>&lt;p&gt;RF-12 | Transición de estados | Datos: REQUESTED → APPROVED → CHECKED_OUT → RETURNED&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 200 RETURNED; retraso=0</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-39 - No devolver una solicitud">
+    <summary>&lt;p&gt;RF-12 | Transición de estados | Datos: REQUESTED → RETURNED&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 STATE</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-40 - No devolver dos veces">
+    <summary>&lt;p&gt;RF-12 | Transición de estados | Datos: RETURNED → RETURNED&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 STATE</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-41 - Redondeo del retraso">
+    <summary>&lt;p&gt;RF-12 | Valores límite | Datos: Devolución 61 segundos después del fin&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>late_minutes=2</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-42 - Mantenimiento con compromiso bloqueado">
+    <summary>&lt;p&gt;RF-05 | Tabla de decisión | Datos: Equipo con reserva APPROVED&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 COMMITTED</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-43 - Activar mantenimiento sin compromisos">
+    <summary>&lt;p&gt;RF-05 | Transición de estados | Datos: AVAILABLE → MAINTENANCE&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 200 MAINTENANCE</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-44 - Auditar creación y aprobación">
+    <summary>&lt;p&gt;RF-14 | Partición de equivalencia | Datos: Crear reserva y aprobarla&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Dos eventos con actor, entidad y fecha</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-45 - Privacidad de reservas">
+    <summary>&lt;p&gt;RF-03 | Tabla de decisión | Datos: Reserva de estudiante A; consulta B&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>B no recibe reservas de A</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-46 - Resumen por estado">
+    <summary>&lt;p&gt;RF-13 | Partición de equivalencia | Datos: Una reserva solicitada&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>counts.REQUESTED=1; equipment=4</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-47 - Cerrar sesión revoca token">
+    <summary>&lt;p&gt;RF-02 | Transición de estados | Datos: Token válido → logout → consulta&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Logout 200; consulta 401</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-48 - Bloqueo de intentos de acceso">
+    <summary>&lt;p&gt;RNF-02 | Valores límite | Datos: Diez intentos fallidos; undécimo intento&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Diez 401; undécimo 429</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-49 - Aprobación simultánea consistente">
+    <summary>&lt;p&gt;RNF-03 | Tabla de decisión | Datos: Dos pendientes mismo equipo y horario; aprobar concurrentemente&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Exactamente una 200 y una 409</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-50 - Login sin cuerpo manejado">
+    <summary>&lt;p&gt;RNF-07 | Partición de equivalencia | Datos: POST /auth/login sin Content-Type ni cuerpo&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 400 BODY; nunca 500</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-51 - No entregar equipo con préstamo sin devolver">
+    <summary>&lt;p&gt;RF-11 | Tabla de decisión | Datos: A [T+1h,T+2h) prestada y vencida; B [T+2h,T+3h) aprobada; entregar B&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 409 OUTSTANDING_LOAN</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-52 - Límite de reservas con concurrencia">
+    <summary>&lt;p&gt;RNF-03 | Tabla de decisión | Datos: Cuatro creaciones simultáneas del mismo usuario&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Tres 201 y una 409</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-53 - JSON mal formado manejado">
+    <summary>&lt;p&gt;RNF-07 | Partición de equivalencia | Datos: POST /auth/login; cuerpo {invalido&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 400 JSON</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-54 - Límite de tamaño del cuerpo">
+    <summary>&lt;p&gt;RNF-07 | Valores límite | Datos: JSON con más de 16 KiB&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 413 SIZE</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-55 - Equipo inexistente">
+    <summary>&lt;p&gt;RF-06 | Partición de equivalencia | Datos: equipment_id=no-existe&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 404 NOT_FOUND</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-56 - Datos con tildes conservados">
+    <summary>&lt;p&gt;RNF-05 | Partición de equivalencia | Datos: Propósito=Medición de tensión y señal óptica&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Mismo propósito recuperado</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-57 - No exponer hash de contraseña">
+    <summary>&lt;p&gt;RNF-02 | Tabla de decisión | Datos: GET /auth/me&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Respuesta sin password ni password_hash</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-58 - Registro no permite escalar privilegios">
+    <summary>&lt;p&gt;RF-03 | Tabla de decisión | Datos: Registro con role=ADMIN&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>Cuenta creada con STUDENT</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-59 - Respuesta de creación consistente con consulta">
+    <summary>&lt;p&gt;RF-05 | Partición de equivalencia | Datos: Nombre con espacios externos: " Generador de señales "&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>POST y GET devuelven nombre normalizado igual</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-60 - Rechazar solicitud">
+    <summary>&lt;p&gt;RF-08 | Transición de estados | Datos: REQUESTED → REJECTED por administrador&lt;/p&gt;</summary>
+    <preconditions>Base de pruebas aislada; equipos LAB-001 a LAB-003 disponibles, LAB-004 en mantenimiento; usuarios administrador, estudiante y otro estudiante; reloj T definido por la ejecución.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar las solicitudes registradas en la evidencia del caso, en el orden indicado. Los tokens se obtienen con las cuentas de prueba.</actions>
+        <expectedresults>HTTP 200 REJECTED</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-61 - Carga de 50 usuarios en cloud">
+    <summary>&lt;p&gt;RNF-01 | Valores límite | Datos: Rampa 1 min de 0 a 50, meseta 5 min, descenso 30 s; GET /equipment y /dashboard.&lt;/p&gt;</summary>
+    <preconditions>QA público HTTPS; cuenta estudiante; k6 instalado.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Ejecutar qa/carga/reservalab.k6.js sobre QA y guardar el resumen.</actions>
+        <expectedresults>p95 &lt; 2 s por endpoint; errores &lt; 1%; reportar promedio y solicitudes/segundo.</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-62 - Persistencia al reabrir la base">
+    <summary>&lt;p&gt;RNF-04 | Transición de estados | Datos: Equipo PER-001 almacenado en PGlite.&lt;/p&gt;</summary>
+    <preconditions>Directorio temporal local, sin reutilizar datos del usuario.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Insertar; cerrar conexión; reabrir mismo directorio; consultar registro.</actions>
+        <expectedresults>Código, nombre y estado se conservan.</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-63 - Flujo principal en escritorio y móvil">
+    <summary>&lt;p&gt;RNF-05 | Partición de equivalencia | Datos: 1440x1000 y 390x844.&lt;/p&gt;</summary>
+    <preconditions>Chromium; datos demo; zona America/Guatemala.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Iniciar sesión; solicitar equipo; aprobar; abrir historial; cambiar a vista móvil.</actions>
+        <expectedresults>Sin error de JavaScript ni desplazamiento horizontal; controles visibles.</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-64 - Cobertura de módulos críticos">
+    <summary>&lt;p&gt;RNF-06 | Valores límite | Datos: 90 pruebas; módulos domain.js y rules.js.&lt;/p&gt;</summary>
+    <preconditions>Node 24; npm ci; baseline-v0 conservado.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>npm run test:coverage; node scripts/check-coverage.mjs.</actions>
+        <expectedresults>Al menos 30 pruebas; incremento &gt;=20 puntos sobre línea base; cobertura de líneas &gt;=80% en alcance.</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+  <testcase name="CP-65 - Publicación y acceso independiente">
+    <summary>&lt;p&gt;RNF-08 | Transición de estados | Datos: URL real frontend y backend; ventana privada.&lt;/p&gt;</summary>
+    <preconditions>Repositorio remoto, backend, frontend y DB cloud creados.</preconditions>
+    <execution_type>1</execution_type>
+    <importance>3</importance>
+    <steps>
+      <step>
+        <step_number>1</step_number>
+        <actions>Compilar; desplegar; abrir desde otra sesión; iniciar sesión con cuenta de prueba; crear reserva; reiniciar backend y volver a consultar.</actions>
+        <expectedresults>Aplicación operativa por HTTPS; reserva conservada; enlaces accesibles al catedrático.</expectedresults>
+        <execution_type>1</execution_type>
+      </step>
+    </steps>
+  </testcase>
+</testsuite>

@@ -1,0 +1,61 @@
+CP-01 Aprobado Registrar estudiante válido 
+CP-02 Aprobado Rechazar correo duplicado 
+CP-03 Aprobado Rechazar correo sin arroba 
+CP-04 Aprobado Contraseña de 9 caracteres 
+CP-05 Aprobado Contraseña de 10 caracteres 
+CP-06 Aprobado Credenciales válidas 
+CP-07 Aprobado Credenciales inválidas 
+CP-08 Aprobado Recurso protegido sin sesión 
+CP-09 Aprobado Sesión vencida a las 8 horas 
+CP-10 Aprobado Consultar catálogo 
+CP-11 Aprobado Estudiante no crea equipos 
+CP-12 Aprobado Administrador crea equipo 
+CP-13 Aprobado Código de equipo duplicado 
+CP-14 Aprobado Reserva de equipo en mantenimiento 
+CP-15 Aprobado Propósito de 9 caracteres 
+CP-16 Aprobado Propósito de 10 caracteres 
+CP-17 Aprobado Propósito de 300 caracteres 
+CP-18 Aprobado Propósito de 301 caracteres 
+CP-19 Aprobado Duración de 59 minutos 
+CP-20 Aprobado Duración de 60 minutos 
+CP-21 Aprobado Duración de 480 minutos 
+CP-22 Aprobado Duración de 481 minutos 
+CP-23 Aprobado Inicio igual al instante actual 
+CP-24 Aprobado Anticipación exacta de 30 días 
+CP-25 Aprobado Anticipación superior a 30 días 
+CP-26 Aprobado Tres reservas activas permitidas 
+CP-27 Aprobado Cuarta reserva activa bloqueada 
+CP-28 Aprobado Aprobar solicitud 
+CP-29 Aprobado Solapamiento con reserva aprobada 
+CP-30 Aprobado Horarios contiguos permitidos 
+CP-31 Aprobado Segunda aprobación sobre horario ocupado 
+CP-32 Aprobado Cancelar solicitud propia 
+CP-33 Aprobado Cancelar solicitud ajena prohibido 
+CP-34 Aprobado Cancelar reserva aprobada 
+CP-35 Aprobado Cancelar al inicio prohibido 
+CP-36 Aprobado Entrega 15 minutos antes 
+CP-37 Aprobado Entrega 16 minutos antes prohibida 
+CP-38 Aprobado Devolución normal 
+CP-39 Aprobado No devolver una solicitud 
+CP-40 Aprobado No devolver dos veces 
+CP-41 Aprobado Redondeo del retraso 
+CP-42 Aprobado Mantenimiento con compromiso bloqueado 
+CP-43 Aprobado Activar mantenimiento sin compromisos 
+CP-44 Aprobado Auditar creación y aprobación 
+CP-45 Aprobado Privacidad de reservas 
+CP-46 Aprobado Resumen por estado 
+CP-47 Aprobado Cerrar sesión revoca token 
+CP-48 Aprobado Bloqueo de intentos de acceso 
+CP-49 Aprobado Aprobación simultánea consistente 
+CP-50 Aprobado Login sin cuerpo manejado 
+CP-51 Aprobado No entregar equipo con préstamo sin devolver 
+CP-52 Aprobado Límite de reservas con concurrencia 
+CP-53 Aprobado JSON mal formado manejado 
+CP-54 Aprobado Límite de tamaño del cuerpo 
+CP-55 Aprobado Equipo inexistente 
+CP-56 Aprobado Datos con tildes conservados 
+CP-57 Aprobado No exponer hash de contraseña 
+CP-58 Aprobado Registro no permite escalar privilegios 
+CP-59 Aprobado Respuesta de creación consistente con consulta 
+CP-60 Aprobado Rechazar solicitud 
+{"total":60,"passed":60,"failed":0}

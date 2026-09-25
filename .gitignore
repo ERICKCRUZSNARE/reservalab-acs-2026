@@ -7,3 +7,7 @@ frontend/dist/
 *.log
 qa/evidencias/*.json
 !qa/evidencias/linea-base/
+__pycache__/
+*.pyc
+*.bundle
+qa/evidencias/linea-base/tmp/

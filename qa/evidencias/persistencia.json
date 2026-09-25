@@ -1,0 +1,15 @@
+{
+  "case": "CP-62",
+  "environment": "LOCAL PGlite en directorio temporal; conexión cerrada y reabierta",
+  "executedAt": "2026-09-25T01:26:09.081Z",
+  "expected": "Registro conservado",
+  "actual": {
+    "id": "persist-1",
+    "code": "PER-001",
+    "name": "Equipo persistente",
+    "category": "Pruebas",
+    "description": "Verificar reinicio",
+    "status": "AVAILABLE"
+  },
+  "result": "Aprobado"
+}
