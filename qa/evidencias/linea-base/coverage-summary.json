@@ -1,0 +1,4 @@
+{"total": {"lines":{"total":69,"covered":0,"skipped":0,"pct":0},"statements":{"total":69,"covered":0,"skipped":0,"pct":0},"functions":{"total":2,"covered":0,"skipped":0,"pct":0},"branches":{"total":2,"covered":0,"skipped":0,"pct":0},"branchesTrue":{"total":0,"covered":0,"skipped":0,"pct":100}}
+,"/workspace/scratch/c1b820b84d07/ReservaLab/backend/src/domain.js": {"lines":{"total":47,"covered":0,"skipped":0,"pct":0},"functions":{"total":1,"covered":0,"skipped":0,"pct":0},"statements":{"total":47,"covered":0,"skipped":0,"pct":0},"branches":{"total":1,"covered":0,"skipped":0,"pct":0}}
+,"/workspace/scratch/c1b820b84d07/ReservaLab/frontend/src/rules.js": {"lines":{"total":22,"covered":0,"skipped":0,"pct":0},"functions":{"total":1,"covered":0,"skipped":0,"pct":0},"statements":{"total":22,"covered":0,"skipped":0,"pct":0},"branches":{"total":1,"covered":0,"skipped":0,"pct":0}}
+}

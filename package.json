@@ -1,0 +1,35 @@
+{
+ "name": "reservalab-acs-2026",
+ "version": "1.0.0",
+ "private": true,
+ "type": "module",
+ "engines": {
+  "node": ">=24 <25"
+ },
+ "workspaces": [
+  "backend",
+  "frontend"
+ ],
+ "scripts": {
+  "dev": "concurrently -n API,WEB -c blue,green \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+  "build": "npm run build -w backend && npm run build -w frontend",
+  "test": "vitest run",
+  "test:coverage": "vitest run --coverage",
+  "test:api": "node scripts/run-api.mjs",
+  "test:functional": "node scripts/functional.mjs",
+  "start": "npm start -w backend",
+  "baseline:coverage": "c8 --all --include=backend/src/domain.js --include=frontend/src/rules.js --reporter=json-summary --reporter=lcov --reports-dir=qa/evidencias/linea-base node -e \"void 0\""
+ },
+ "devDependencies": {
+  "@testing-library/jest-dom": "7.0.1",
+  "@testing-library/react": "16.3.3",
+  "@vitejs/plugin-react": "6.1.1",
+  "@vitest/coverage-v8": "5.0.1",
+  "c8": "12.0.0",
+  "concurrently": "10.0.5",
+  "jsdom": "30.1.1",
+  "newman": "6.2.2",
+  "vite": "8.3.1",
+  "vitest": "5.0.1"
+ }
+}
