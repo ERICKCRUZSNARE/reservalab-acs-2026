@@ -1,0 +1,765 @@
+{
+  "total": 11,
+  "p": 1,
+  "ps": 500,
+  "paging": {
+    "pageIndex": 1,
+    "pageSize": 500,
+    "total": 11
+  },
+  "effortTotal": 66,
+  "issues": [
+    {
+      "key": "3897eec3-d929-4fee-acb4-a3b226fea970",
+      "rule": "javascript:S8786",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:backend/src/domain.js",
+      "project": "reservalab-dev",
+      "line": 25,
+      "hash": "6032ca7c46e337f626cb4f61a566272f",
+      "textRange": {
+        "startLine": 25,
+        "endLine": 25,
+        "startOffset": 6,
+        "endOffset": 34
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Simplify this regular expression to reduce its runtime, as it has super-linear performance due to backtracking.",
+      "effort": "20min",
+      "debt": "20min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "regex",
+        "performance"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "CODE_SMELL",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "46aa0e65-7d10-46d8-8d50-e7748acfa48a",
+      "rule": "javascript:S3776",
+      "severity": "CRITICAL",
+      "component": "reservalab-dev:frontend/src/main.jsx",
+      "project": "reservalab-dev",
+      "line": 39,
+      "hash": "e7e751750c8d845faf4edd3d1bdc722f",
+      "textRange": {
+        "startLine": 39,
+        "endLine": 39,
+        "startOffset": 9,
+        "endOffset": 12
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 182,
+                "endLine": 182,
+                "startOffset": 2,
+                "endOffset": 4
+              },
+              "msg": "+1",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 210,
+                "endLine": 210,
+                "startOffset": 26,
+                "endOffset": 27
+              },
+              "msg": "+2 (incl. 1 for nesting)",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 213,
+                "endLine": 213,
+                "startOffset": 16,
+                "endOffset": 17
+              },
+              "msg": "+2 (incl. 1 for nesting)",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 238,
+                "endLine": 238,
+                "startOffset": 39,
+                "endOffset": 40
+              },
+              "msg": "+2 (incl. 1 for nesting)",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 252,
+                "endLine": 252,
+                "startOffset": 18,
+                "endOffset": 19
+              },
+              "msg": "+2 (incl. 1 for nesting)",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 254,
+                "endLine": 254,
+                "startOffset": 20,
+                "endOffset": 21
+              },
+              "msg": "+3 (incl. 2 for nesting)",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 271,
+                "endLine": 271,
+                "startOffset": 16,
+                "endOffset": 17
+              },
+              "msg": "+2 (incl. 1 for nesting)",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 293,
+                "endLine": 293,
+                "startOffset": 38,
+                "endOffset": 39
+              },
+              "msg": "+1",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 312,
+                "endLine": 312,
+                "startOffset": 39,
+                "endOffset": 40
+              },
+              "msg": "+1",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 335,
+                "endLine": 335,
+                "startOffset": 16,
+                "endOffset": 17
+              },
+              "msg": "+1",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 337,
+                "endLine": 337,
+                "startOffset": 18,
+                "endOffset": 19
+              },
+              "msg": "+2 (incl. 1 for nesting)",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 342,
+                "endLine": 342,
+                "startOffset": 16,
+                "endOffset": 17
+              },
+              "msg": "+1",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 344,
+                "endLine": 344,
+                "startOffset": 18,
+                "endOffset": 19
+              },
+              "msg": "+2 (incl. 1 for nesting)",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 349,
+                "endLine": 349,
+                "startOffset": 21,
+                "endOffset": 22
+              },
+              "msg": "+1",
+              "msgFormattings": []
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "reservalab-dev:frontend/src/main.jsx",
+              "textRange": {
+                "startLine": 554,
+                "endLine": 554,
+                "startOffset": 18,
+                "endOffset": 19
+              },
+              "msg": "+1",
+              "msgFormattings": []
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+      "effort": "14min",
+      "debt": "14min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "brain-overload",
+        "editable-source"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "CODE_SMELL",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "FOCUSED",
+      "cleanCodeAttributeCategory": "ADAPTABLE",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "ff147c38-216a-4488-9eac-812379c28f79",
+      "rule": "javascript:S9011",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:frontend/src/main.jsx",
+      "project": "reservalab-dev",
+      "line": 250,
+      "hash": "11a9c0ac7d39a436b76df45d0b1440db",
+      "textRange": {
+        "startLine": 250,
+        "endLine": 256,
+        "startOffset": 14,
+        "endOffset": 23
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Add an explicit \"type\" attribute to this button.",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "vue",
+        "react"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "BUG",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "9a574a7c-95cf-48d4-97cf-46db8e98ea33",
+      "rule": "javascript:S3358",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:frontend/src/main.jsx",
+      "project": "reservalab-dev",
+      "line": 253,
+      "hash": "6eadcc495bf3b93f68a76cc36221a762",
+      "textRange": {
+        "startLine": 253,
+        "endLine": 255,
+        "startOffset": 20,
+        "endOffset": 43
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Extract this nested ternary operation into an independent statement.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "editable-source",
+        "confusing"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "CODE_SMELL",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "dd44c131-d18f-49ae-be82-f34112abcc34",
+      "rule": "javascript:S6819",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:frontend/src/main.jsx",
+      "project": "reservalab-dev",
+      "line": 259,
+      "hash": "f67e22fff2dc631ebf909929421e46dc",
+      "textRange": {
+        "startLine": 259,
+        "endLine": 259,
+        "startOffset": 14,
+        "endOffset": 50
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use <output> instead of the \"status\" role to ensure accessibility across all devices.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "accessibility",
+        "react"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "CODE_SMELL",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "c37e392d-90db-401b-90bf-c32f578e642a",
+      "rule": "javascript:S3358",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:frontend/src/main.jsx",
+      "project": "reservalab-dev",
+      "line": 336,
+      "hash": "ff0214b644d454f535288e12def7e583",
+      "textRange": {
+        "startLine": 336,
+        "endLine": 338,
+        "startOffset": 18,
+        "endOffset": 30
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Extract this nested ternary operation into an independent statement.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "editable-source",
+        "confusing"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "CODE_SMELL",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "56d807b4-4081-4264-9848-b9e06f535e3a",
+      "rule": "javascript:S3358",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:frontend/src/main.jsx",
+      "project": "reservalab-dev",
+      "line": 343,
+      "hash": "ff0214b644d454f535288e12def7e583",
+      "textRange": {
+        "startLine": 343,
+        "endLine": 345,
+        "startOffset": 18,
+        "endOffset": 42
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Extract this nested ternary operation into an independent statement.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "editable-source",
+        "confusing"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "CODE_SMELL",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "3296c6d4-410f-4da0-9e05-ea7aa7ab889f",
+      "rule": "javascript:S6819",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:frontend/src/main.jsx",
+      "project": "reservalab-dev",
+      "line": 380,
+      "hash": "84b5a882e169c6c5a897a9c1bebf3354",
+      "textRange": {
+        "startLine": 380,
+        "endLine": 380,
+        "startOffset": 10,
+        "endOffset": 48
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use <output> instead of the \"status\" role to ensure accessibility across all devices.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "accessibility",
+        "react"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "CODE_SMELL",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "44841020-8998-4017-a21b-943ef47ab43e",
+      "rule": "javascript:S9011",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:frontend/src/main.jsx",
+      "project": "reservalab-dev",
+      "line": 431,
+      "hash": "f24bb3a97c36aa4703b4ce414666068a",
+      "textRange": {
+        "startLine": 431,
+        "endLine": 433,
+        "startOffset": 20,
+        "endOffset": 29
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Add an explicit \"type\" attribute to this button.",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "vue",
+        "react"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "BUG",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "1da099cd-5ebb-46a6-929f-9601a9ed8943",
+      "rule": "javascript:S9011",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:frontend/src/main.jsx",
+      "project": "reservalab-dev",
+      "line": 491,
+      "hash": "f24bb3a97c36aa4703b4ce414666068a",
+      "textRange": {
+        "startLine": 491,
+        "endLine": 493,
+        "startOffset": 18,
+        "endOffset": 27
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Add an explicit \"type\" attribute to this button.",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [
+        "vue",
+        "react"
+      ],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "BUG",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "68a60418-2ec2-454b-8bb7-c3a7786ec2b8",
+      "rule": "css:S4666",
+      "severity": "MAJOR",
+      "component": "reservalab-dev:frontend/src/style.css",
+      "project": "reservalab-dev",
+      "line": 533,
+      "hash": "7fa740d163132b0d6c0caf903fbb86d5",
+      "textRange": {
+        "startLine": 533,
+        "endLine": 533,
+        "startOffset": 2,
+        "endOffset": 12
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Duplicate selector \".workspace\", first used at line 527",
+      "effort": "1min",
+      "debt": "1min",
+      "author": "codex-assistance@example.invalid",
+      "tags": [],
+      "creationDate": "2026-09-25T01:42:50+0000",
+      "updateDate": "2026-10-30T15:11:26+0000",
+      "type": "CODE_SMELL",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    }
+  ],
+  "components": [
+    {
+      "key": "reservalab-dev:frontend/src/style.css",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "style.css",
+      "longName": "frontend/src/style.css",
+      "path": "frontend/src/style.css"
+    },
+    {
+      "key": "reservalab-dev",
+      "enabled": true,
+      "qualifier": "TRK",
+      "name": "ReservaLab DEV",
+      "longName": "ReservaLab DEV"
+    },
+    {
+      "key": "reservalab-dev:backend/src/domain.js",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "domain.js",
+      "longName": "backend/src/domain.js",
+      "path": "backend/src/domain.js"
+    },
+    {
+      "key": "reservalab-dev:frontend/src/main.jsx",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "main.jsx",
+      "longName": "frontend/src/main.jsx",
+      "path": "frontend/src/main.jsx"
+    }
+  ],
+  "facets": []
+}
