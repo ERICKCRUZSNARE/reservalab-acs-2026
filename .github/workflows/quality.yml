@@ -7,12 +7,17 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+defaults:
+  run:
+    shell: powershell
 concurrency:
   group: quality-${{ github.base_ref || github.ref_name }}
   cancel-in-progress: false
 jobs:
   quality:
     name: quality
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    timeout-minutes: 60
     runs-on: [self-hosted, Windows, X64]
     environment: ${{ (github.base_ref || github.ref_name) == 'main' && 'PROD' || ((github.base_ref || github.ref_name) == 'QA' && 'QA' || 'DEV') }}
     steps:
@@ -24,17 +29,18 @@ jobs:
           node-version: "24"
           cache: npm
       - name: Instalar dependencias
-        run: npm ci
+        run: npm.cmd ci
       - name: 1 - Compilar backend y frontend
-        run: npm run build
+        run: npm.cmd run build
       - name: 2 - Pruebas unitarias y cobertura
-        run: npm run test:coverage
+        run: npm.cmd run test:coverage
       - name: Verificar incremento sobre línea base
         run: node scripts/check-coverage.mjs
       - name: 3 - SonarQube y Quality Gate
         shell: powershell
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: http://localhost:9000
           SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
         run: |
           if (-not $env:SONAR_PROJECT_KEY) { throw "Configura SONAR_PROJECT_KEY en el ambiente" }
@@ -46,11 +52,11 @@ jobs:
           SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
         run: node scripts/sonar-evidence.mjs actual
       - name: 4 - Pruebas API con Newman
-        run: npm run test:api
+        run: npm.cmd run test:api
       - name: Regresión funcional
-        run: npm run test:functional
+        run: npm.cmd run test:functional
       - name: 5 - Desplegar el commit verificado
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && contains(fromJSON('["DEV", "QA", "main"]'), github.ref_name)
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
           RENDER_BACKEND_ID: ${{ vars.RENDER_BACKEND_ID }}
