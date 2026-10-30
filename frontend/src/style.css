@@ -129,6 +129,7 @@ small {
   border-color: #ad2538;
 }
 .notice {
+  display: block;
   background: #e2f3ef;
   color: #144a43;
   border: 1px solid #adcec6;
@@ -526,13 +527,11 @@ footer {
 @media (max-width: 1050px) {
   .workspace {
     padding: 30px 25px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
   }
   .app aside {
     width: 200px;
-  }
-  .workspace {
-    margin-left: 200px;
-    width: calc(100% - 200px);
   }
   .equipment-grid {
     grid-template-columns: 1fr;
