@@ -11,6 +11,18 @@ export const ACTIVE = ["REQUESTED", "APPROVED", "CHECKED_OUT"];
 export function requireRule(condition, code, message, status = 422) {
   if (!condition) throw new RuleError(code, message, status);
 }
+function validEmail(email) {
+  if (typeof email !== "string" || email.length > 120) return false;
+  const separator = email.indexOf("@");
+  const domainDot = email.indexOf(".", separator + 2);
+  return (
+    separator > 0 &&
+    separator === email.lastIndexOf("@") &&
+    domainDot !== -1 &&
+    domainDot < email.length - 1 &&
+    !/\s/.test(email)
+  );
+}
 export function validateRegistration({ name, email, password }) {
   requireRule(
     typeof name === "string" &&
@@ -19,13 +31,7 @@ export function validateRegistration({ name, email, password }) {
     "NAME",
     "El nombre debe tener entre 2 y 80 caracteres.",
   );
-  requireRule(
-    typeof email === "string" &&
-      email.length <= 120 &&
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
-    "EMAIL",
-    "Ingresa un correo válido.",
-  );
+  requireRule(validEmail(email), "EMAIL", "Ingresa un correo válido.");
   requireRule(
     typeof password === "string" &&
       password.length >= 10 &&

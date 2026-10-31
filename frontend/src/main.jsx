@@ -36,6 +36,132 @@ function Field({ label, error, ...props }) {
     </label>
   );
 }
+function LoginScreen({
+  register,
+  login,
+  setLogin,
+  signIn,
+  busy,
+  message,
+  setRegister,
+  setMessage,
+}) {
+  let submitLabel = register ? "Crear cuenta" : "Entrar a ReservaLab";
+  if (busy) submitLabel = "Procesando…";
+  return (
+    <main className="login-page">
+      <section className="brand-panel">
+        <div className="brand">
+          R<span>ReservaLab</span>
+        </div>
+        <div>
+          <p className="eyebrow">LABORATORIOS · GESTIÓN DE EQUIPOS</p>
+          <h1>
+            El equipo correcto.
+            <br />
+            En el momento
+            <br />
+            <em>que lo necesitas.</em>
+          </h1>
+          <p>
+            Consulta equipos, solicita una reserva y lleva el control de tus
+            préstamos.
+          </p>
+        </div>
+        <p className="brand-foot">
+          Reservas claras. Laboratorios en movimiento.
+        </p>
+      </section>
+      <section className="login-panel">
+        <div className="login-card">
+          <p className="eyebrow">BIENVENIDO A RESERVALAB</p>
+          <h2>{register ? "Crea tu cuenta" : "Inicia sesión"}</h2>
+          <p className="muted">
+            {register
+              ? "Tu cuenta tendrá el rol de estudiante."
+              : "Ingresa para consultar equipos y gestionar reservas."}
+          </p>
+          <form onSubmit={signIn}>
+            {register && (
+              <Field
+                label="Nombre completo"
+                value={login.name}
+                onChange={(e) => setLogin({ ...login, name: e.target.value })}
+                required
+                minLength={2}
+                maxLength={80}
+              />
+            )}
+            <Field
+              label="Correo electrónico"
+              type="email"
+              autoComplete="username"
+              value={login.email}
+              onChange={(e) => setLogin({ ...login, email: e.target.value })}
+              required
+            />
+            <Field
+              label="Contraseña"
+              type="password"
+              autoComplete={register ? "new-password" : "current-password"}
+              value={login.password}
+              onChange={(e) => setLogin({ ...login, password: e.target.value })}
+              required
+            />
+            {register && (
+              <p className="hint">
+                De 10 a 128 caracteres, con mayúscula, minúscula y número.
+              </p>
+            )}
+            <button type="submit" className="primary wide" disabled={busy}>
+              {submitLabel}
+            </button>
+          </form>
+          {message && <output className="notice">{message}</output>}
+          <button
+            type="button"
+            className="text-button"
+            onClick={() => {
+              setRegister(!register);
+              setMessage("");
+            }}
+          >
+            {register
+              ? "Ya tengo una cuenta"
+              : "Crear una cuenta de estudiante"}
+          </button>
+          <div className="demo-note">
+            Ambiente académico. Utiliza únicamente datos de prueba.
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+const workspaceTitles = {
+  catalog: { section: "CATÁLOGO", title: "Equipos para tu próxima práctica" },
+  audit: { section: "ACTIVIDAD", title: "Historial de actividad" },
+  reservations: { section: "RESERVAS", title: "Reservas y préstamos" },
+};
+function WorkspaceHeader({ tab, loading, refresh }) {
+  const heading = workspaceTitles[tab] ?? workspaceTitles.reservations;
+  return (
+    <header>
+      <div>
+        <p className="eyebrow">LABORATORIO / {heading.section}</p>
+        <h1>{heading.title}</h1>
+      </div>
+      <button
+        type="button"
+        className="secondary"
+        onClick={refresh}
+        disabled={loading}
+      >
+        {loading ? "Cargando…" : "Actualizar"}
+      </button>
+    </header>
+  );
+}
 function App() {
   const [session, setSession] = useState(null),
     [tab, setTab] = useState("catalog"),
@@ -179,105 +305,20 @@ function App() {
       setBusy(false);
     }
   }
-  if (!session)
+  if (!session) {
     return (
-      <main className="login-page">
-        <section className="brand-panel">
-          <div className="brand">
-            R<span>ReservaLab</span>
-          </div>
-          <div>
-            <p className="eyebrow">LABORATORIOS · GESTIÓN DE EQUIPOS</p>
-            <h1>
-              El equipo correcto.
-              <br />
-              En el momento
-              <br />
-              <em>que lo necesitas.</em>
-            </h1>
-            <p>
-              Consulta equipos, solicita una reserva y lleva el control de tus
-              préstamos.
-            </p>
-          </div>
-          <p className="brand-foot">
-            Reservas claras. Laboratorios en movimiento.
-          </p>
-        </section>
-        <section className="login-panel">
-          <div className="login-card">
-            <p className="eyebrow">BIENVENIDO A RESERVALAB</p>
-            <h2>{register ? "Crea tu cuenta" : "Inicia sesión"}</h2>
-            <p className="muted">
-              {register
-                ? "Tu cuenta tendrá el rol de estudiante."
-                : "Ingresa para consultar equipos y gestionar reservas."}
-            </p>
-            <form onSubmit={signIn}>
-              {register && (
-                <Field
-                  label="Nombre completo"
-                  value={login.name}
-                  onChange={(e) => setLogin({ ...login, name: e.target.value })}
-                  required
-                  minLength={2}
-                  maxLength={80}
-                />
-              )}
-              <Field
-                label="Correo electrónico"
-                type="email"
-                autoComplete="username"
-                value={login.email}
-                onChange={(e) => setLogin({ ...login, email: e.target.value })}
-                required
-              />
-              <Field
-                label="Contraseña"
-                type="password"
-                autoComplete={register ? "new-password" : "current-password"}
-                value={login.password}
-                onChange={(e) =>
-                  setLogin({ ...login, password: e.target.value })
-                }
-                required
-              />
-              {register && (
-                <p className="hint">
-                  De 10 a 128 caracteres, con mayúscula, minúscula y número.
-                </p>
-              )}
-              <button className="primary wide" disabled={busy}>
-                {busy
-                  ? "Procesando…"
-                  : register
-                    ? "Crear cuenta"
-                    : "Entrar a ReservaLab"}
-              </button>
-            </form>
-            {message && (
-              <p role="status" className="notice">
-                {message}
-              </p>
-            )}
-            <button
-              className="text-button"
-              onClick={() => {
-                setRegister(!register);
-                setMessage("");
-              }}
-            >
-              {register
-                ? "Ya tengo una cuenta"
-                : "Crear una cuenta de estudiante"}
-            </button>
-            <div className="demo-note">
-              Ambiente académico. Utiliza únicamente datos de prueba.
-            </div>
-          </div>
-        </section>
-      </main>
+      <LoginScreen
+        register={register}
+        login={login}
+        setLogin={setLogin}
+        signIn={signIn}
+        busy={busy}
+        message={message}
+        setRegister={setRegister}
+        setMessage={setMessage}
+      />
     );
+  }
   const user = session.user;
   return (
     <div className="app">
@@ -293,6 +334,7 @@ function App() {
             ...(user.role === "ADMIN" ? [["audit", "Actividad"]] : []),
           ].map(([id, name]) => (
             <button
+              type="button"
               key={id}
               aria-current={tab === id ? "page" : undefined}
               className={tab === id ? "active" : ""}
@@ -311,6 +353,7 @@ function App() {
           <strong>{user.name}</strong>
           <span>{user.role === "ADMIN" ? "Administrador" : "Estudiante"}</span>
           <button
+            type="button"
             onClick={async () => {
               try {
                 await request("/auth/logout", { method: "POST" });
@@ -327,28 +370,7 @@ function App() {
         </div>
       </aside>
       <main className="workspace">
-        <header>
-          <div>
-            <p className="eyebrow">
-              LABORATORIO /{" "}
-              {tab === "catalog"
-                ? "CATÁLOGO"
-                : tab === "audit"
-                  ? "ACTIVIDAD"
-                  : "RESERVAS"}
-            </p>
-            <h1>
-              {tab === "catalog"
-                ? "Equipos para tu próxima práctica"
-                : tab === "audit"
-                  ? "Historial de actividad"
-                  : "Reservas y préstamos"}
-            </h1>
-          </div>
-          <button className="secondary" onClick={refresh} disabled={loading}>
-            {loading ? "Cargando…" : "Actualizar"}
-          </button>
-        </header>
+        <WorkspaceHeader tab={tab} loading={loading} refresh={refresh} />
         <section className="stats" aria-label="Resumen">
           <div>
             <span>Equipos disponibles</span>
@@ -377,12 +399,16 @@ function App() {
           </div>
         </section>
         {message && (
-          <div className="notice" role="status">
+          <output className="notice">
             {message}
-            <button aria-label="Cerrar mensaje" onClick={() => setMessage("")}>
+            <button
+              type="button"
+              aria-label="Cerrar mensaje"
+              onClick={() => setMessage("")}
+            >
               ×
             </button>
-          </div>
+          </output>
         )}
         {tab === "catalog" && (
           <>
@@ -397,6 +423,7 @@ function App() {
               </label>
               {user.role === "ADMIN" && (
                 <button
+                  type="button"
                   className="primary"
                   onClick={() => {
                     setAdding(!adding);
@@ -428,7 +455,7 @@ function App() {
                     />
                   ))}
                   <div className="form-actions">
-                    <button className="primary" disabled={busy}>
+                    <button type="submit" className="primary" disabled={busy}>
                       Guardar equipo
                     </button>
                     <button
@@ -447,6 +474,7 @@ function App() {
                 <div className="section-head">
                   <h2>Reservar {selected.name}</h2>
                   <button
+                    type="button"
                     className="text-button"
                     onClick={() => setSelected(null)}
                   >
@@ -488,14 +516,14 @@ function App() {
                       <small className="error">{errors.purpose}</small>
                     )}
                   </label>
-                  <button className="primary" disabled={busy}>
+                  <button type="submit" className="primary" disabled={busy}>
                     Enviar solicitud
                   </button>
                 </form>
               </section>
             )}
             <div className="equipment-grid">
-              {filterEquipment(equipment, query).map((eq, i) => (
+              {filterEquipment(equipment, query).map((eq) => (
                 <article className="equipment-card" key={eq.id}>
                   <div className="equipment-top">
                     <span className="equipment-number">{eq.code}</span>
@@ -508,6 +536,7 @@ function App() {
                   <p>{eq.description}</p>
                   <div className="card-actions">
                     <button
+                      type="button"
                       className="primary"
                       disabled={eq.status !== "AVAILABLE" || busy}
                       onClick={() => {
@@ -581,6 +610,7 @@ function App() {
                   <div className="reservation-actions">
                     {visibleActions(r, user).map((action) => (
                       <button
+                        type="button"
                         disabled={busy}
                         key={action}
                         className={
@@ -603,7 +633,11 @@ function App() {
                 <p>
                   Elige un equipo del catálogo y envía tu primera solicitud.
                 </p>
-                <button className="primary" onClick={() => setTab("catalog")}>
+                <button
+                  type="button"
+                  className="primary"
+                  onClick={() => setTab("catalog")}
+                >
                   Ver equipos
                 </button>
               </div>

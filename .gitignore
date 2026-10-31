@@ -1,4 +1,5 @@
 node_modules/
+.scannerwork/
 .env
 .data/
 backend/.data/

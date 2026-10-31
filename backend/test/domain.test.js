@@ -63,6 +63,45 @@ describe("Registro: particiones y límites", () => {
       }),
     ).toThrow());
 });
+describe("Registro: regresión del formato de correo", () => {
+  for (const email of [
+    "a@b.c",
+    "erick.cruz+lab@sub.example.test",
+    "ERICK@EXAMPLE.TEST",
+    "x".repeat(116) + "@b.c",
+  ]) {
+    it(`acepta correo válido de ${email.length} caracteres: ${email.slice(0, 30)}`, () => {
+      expect(
+        validateRegistration({ name: "Erick", email, password: "Seguro2026!" })
+          .email,
+      ).toBe(email.toLowerCase());
+    });
+  }
+  for (const email of [
+    null,
+    undefined,
+    42,
+    "",
+    "@b.c",
+    "a@",
+    "a@b",
+    "a@.c",
+    "a@b.",
+    "a@@b.c",
+    "a@b.c@d.e",
+    "a b@c.d",
+    "a@b c.d",
+    "a@b.c\n",
+    "a\t@b.c",
+    "x".repeat(117) + "@b.c",
+  ]) {
+    it(`rechaza correo inválido: ${String(email).slice(0, 30)}`, () => {
+      expect(() =>
+        validateRegistration({ name: "Erick", email, password: "Seguro2026!" }),
+      ).toThrow("Ingresa un correo válido.");
+    });
+  }
+});
 describe("Reserva: fronteras temporales", () => {
   for (const hours of [1, 8])
     it(`acepta duración ${hours}h`, () =>
